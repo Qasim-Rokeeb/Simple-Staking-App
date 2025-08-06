@@ -1,291 +1,274 @@
-# Simple Staking dApp - Day 14
+Here's an **updated version** of your `README.md` that reflects your project's structure, frontend architecture, and usability. I’ve improved formatting, added clarity, and made minor enhancements for better developer experience and readability.
 
-A decentralized staking application that allows users to stake tokens and earn rewards. This project demonstrates fundamental DeFi concepts including token staking, reward distribution, and APY calculations.
+---
+
+```md
+# 🧱 Simple Staking dApp - Day 14
+
+A decentralized staking application where users can stake tokens to earn yield over time. This dApp demonstrates essential DeFi concepts like staking, real-time reward calculation, APY logic, and token interaction using a user-friendly interface.
+
+---
 
 ## 🚀 Features
 
-### Core Functionality
-- **Token Staking**: Stake tokens to earn rewards
-- **Flexible Unstaking**: Withdraw staked tokens anytime
-- **Reward System**: Earn rewards based on staked amount and time
-- **Real-time APY**: Display current Annual Percentage Yield
-- **Reward Claiming**: Claim earned rewards separately
+### Core dApp Functionality
+- ✅ **Token Staking** – Stake ERC-20 tokens to earn rewards
+- ✅ **Flexible Unstaking** – Withdraw staked tokens anytime
+- ✅ **Reward System** – Accrue rewards automatically over time
+- ✅ **APY Display** – See current APY and reward rates
+- ✅ **Claim Rewards** – Claim accumulated staking rewards separately
 
-### Smart Contract Features
-- ERC20 token integration
-- Secure staking mechanism
-- Automatic reward calculation
-- Emergency functions
-- Gas-optimized operations
+### Frontend Highlights
+- 🎨 **Responsive UI** with Tailwind CSS
+- ⚡ **Live Stats** – Real-time staking and rewards data
+- 👛 **Wallet Integration** with MetaMask & Web3 wallets
+- 🌐 **Base Sepolia Support** (Chain ID: 84532)
+- 🧭 **Component-Based Architecture** using React + Hooks
+- 📦 Modular folder structure for scalability
 
-### Frontend Features
-- **Responsive Design**: Mobile-first design with Tailwind CSS
-- **Real-time Updates**: Live balance and reward tracking
-- **Wallet Integration**: MetaMask and other Web3 wallets
-- **Network Support**: Base Sepolia testnet
-- **User-friendly Interface**: Intuitive staking experience
+---
+
+## 🧱 Project Structure
+
+```
+
+simple-staking-dapp/
+│
+├── node\_modules/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── Header.jsx
+│   │   ├── WalletStatus.jsx
+│   │   ├── StakeForm.jsx
+│   │   ├── UnstakeForm.jsx
+│   │   ├── StatsOverview\.jsx
+│   │   ├── RewardsSection.jsx
+│   │   └── InfoSection.jsx
+│   ├── hooks/
+│   │   └── useStaking.js
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── .env
+├── README.md
+├── package.json
+├── tailwind.config.js
+├── vite.config.js
+└── index.html
+
+````
+
+---
 
 ## 🛠 Technical Stack
 
-### Smart Contracts
-- **Solidity ^0.8.19**: Smart contract development
-- **OpenZeppelin**: Security standards and utilities
-- **Hardhat/Foundry**: Development and testing framework
+### 💻 Frontend
+- **React 18** – UI library for components
+- **Tailwind CSS** – Styling framework
+- **ethers.js** – Ethereum blockchain interaction
+- **Lucide React** – Icon components
+- **Vite** – Fast dev bundler
 
-### Frontend
-- **React 18**: Component-based UI framework
-- **Tailwind CSS**: Utility-first styling
-- **ethers.js**: Ethereum blockchain interaction
-- **Lucide React**: Beautiful icons
+### ⚙️ Smart Contracts
+- **Solidity ^0.8.19**
+- **OpenZeppelin Contracts**
+- **Hardhat** or **Foundry** for local development
 
-### Network
-- **Base Sepolia Testnet**: Testing environment
-- **Chain ID**: 84532
-- **RPC URL**: https://sepolia.base.org
+### 🌐 Network
+- **Base Sepolia Testnet**
+- **Chain ID:** `84532`
+- **RPC URL:** `https://sepolia.base.org`
+
+---
 
 ## 📋 Prerequisites
 
-Before running this project, make sure you have:
+Before starting, ensure you have:
 
-- **Node.js** (v16 or higher)
-- **MetaMask** browser extension
-- **Base Sepolia ETH** for gas fees
-- **Test tokens** for staking
+- ✅ Node.js (v16+)
+- ✅ MetaMask Extension
+- ✅ Base Sepolia ETH (get from faucet)
+- ✅ ERC-20 test tokens (for staking)
 
-## 🏗 Smart Contract Architecture
+---
 
-### StakingContract.sol
+## 🔐 Smart Contract Overview
+
+### Core Contract Interface
+
 ```solidity
-// Core functions
 function stake(uint256 amount) external;
 function unstake(uint256 amount) external;
 function claimRewards() external;
 
-// View functions
 function getStakedAmount(address user) external view returns (uint256);
 function getEarnedRewards(address user) external view returns (uint256);
 function getTotalStaked() external view returns (uint256);
 function getAPY() external view returns (uint256);
-```
+````
 
-### Key Features
-- **Access Control**: Only authorized users can modify parameters
-- **Reward Calculation**: Time-based reward distribution
-- **Safety Checks**: Prevents over-withdrawing and invalid operations
-- **Event Logging**: Comprehensive event emission for frontend integration
+### 🔑 Key Contract Features
+
+* APY-based reward system
+* Full access control and safety checks
+* Pausable emergency mechanism
+* Event-driven state tracking
+
+---
 
 ## 🚀 Getting Started
 
-### 1. Clone and Setup
+### 1. Clone the Project
+
 ```bash
 git clone <repository-url>
-cd simple-staking
+cd simple-staking-dapp
 npm install
 ```
 
-### 2. Environment Configuration
+### 2. Environment Setup
+
 Create a `.env` file:
+
 ```env
-REACT_APP_STAKING_CONTRACT_ADDRESS=0x...
-REACT_APP_TOKEN_CONTRACT_ADDRESS=0x...
-REACT_APP_BASE_SEPOLIA_RPC=https://sepolia.base.org
+VITE_STAKING_CONTRACT_ADDRESS=0xYourStakingContract
+VITE_TOKEN_CONTRACT_ADDRESS=0xYourTokenContract
+VITE_BASE_SEPOLIA_RPC=https://sepolia.base.org
 ```
 
-### 3. Smart Contract Deployment
+> ⚠️ Use `VITE_` prefix for frontend environment variables.
 
-#### Using Hardhat
+---
+
+## 🧪 Smart Contract Deployment
+
+### Deploy via Hardhat
+
 ```bash
-# Install dependencies
 npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox
-
-# Compile contracts
 npx hardhat compile
-
-# Deploy to Base Sepolia
 npx hardhat run scripts/deploy.js --network base-sepolia
 ```
 
-#### Sample Deploy Script
-```javascript
+### Example Deploy Script
+
+```js
 const { ethers } = require("hardhat");
 
 async function main() {
-  // Deploy token first
   const Token = await ethers.getContractFactory("StakeToken");
   const token = await Token.deploy("Stake Token", "STAKE", ethers.utils.parseEther("1000000"));
-  
-  // Deploy staking contract
+
   const Staking = await ethers.getContractFactory("SimpleStaking");
   const staking = await Staking.deploy(token.address, 12); // 12% APY
-  
-  console.log("Token deployed to:", token.address);
-  console.log("Staking deployed to:", staking.address);
+
+  console.log("Token:", token.address);
+  console.log("Staking:", staking.address);
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+main().catch(console.error);
 ```
 
-### 4. Frontend Development
+---
+
+## ⚛️ Frontend Development
+
 ```bash
-# Start development server
-npm start
+# Start local dev server
+npm run dev
 
 # Build for production
 npm run build
 ```
 
-## 🎯 Usage Guide
+---
+
+## 💡 Usage Guide
 
 ### For Users
 
-1. **Connect Wallet**
-   - Click "Connect Wallet" button
-   - Approve MetaMask connection
-   - Switch to Base Sepolia if prompted
-
-2. **Get Test Tokens**
-   - Visit Base Sepolia faucet
-   - Get test ETH for gas fees
-   - Acquire test STAKE tokens from faucet
-
-3. **Stake Tokens**
-   - Enter amount to stake
-   - Click "Stake Tokens"
-   - Approve token spending (first time)
-   - Confirm staking transaction
-
-4. **Monitor Rewards**
-   - View real-time reward accumulation
-   - Check daily reward estimates
-   - Monitor APY changes
-
-5. **Claim Rewards**
-   - Click "Claim Rewards" when ready
-   - Confirm transaction
-   - Rewards added to wallet balance
-
-6. **Unstake Tokens**
-   - Enter amount to unstake
-   - Click "Unstake Tokens"
-   - Confirm transaction
+1. Connect your MetaMask wallet
+2. Acquire test tokens and gas from Base Sepolia faucet
+3. Stake tokens via UI
+4. Monitor rewards and claim when ready
+5. Unstake tokens anytime
 
 ### For Developers
 
-#### Contract Integration
-```javascript
-// Initialize contract
-const stakingContract = new ethers.Contract(
-  STAKING_ADDRESS,
-  STAKING_ABI,
-  signer
-);
+```js
+// Load contracts
+const staking = new ethers.Contract(address, abi, signer);
 
-// Stake tokens
-await tokenContract.approve(STAKING_ADDRESS, amount);
-await stakingContract.stake(amount);
+// Stake
+await token.approve(staking.address, amount);
+await staking.stake(amount);
 
-// Check rewards
-const rewards = await stakingContract.getEarnedRewards(userAddress);
+// Claim rewards
+await staking.claimRewards();
 ```
 
-## 💡 Key Concepts
+---
 
-### Staking Mechanism
-- Users lock tokens in the contract
-- Rewards accrue based on time and amount staked
-- APY determines reward rate
-- No lock-up period for flexibility
+## 📊 Reward Model
 
-### Reward Calculation
 ```
 Daily Reward = (Staked Amount × APY) / 365
 ```
 
-### Security Features
-- **Reentrancy Protection**: Prevents recursive calls
-- **Access Control**: Role-based permissions
-- **Safe Math**: Overflow protection
-- **Emergency Pause**: Circuit breaker functionality
+* Rewards accrue automatically
+* APY can be adjusted via admin
+* No lock-up period
 
-## 🧪 Testing
+---
 
-### Smart Contract Tests
+## ✅ Test Coverage
+
+### Smart Contracts
+
 ```bash
-# Run contract tests
 npx hardhat test
-
-# Coverage report
 npx hardhat coverage
 ```
 
-### Frontend Tests
-```bash
-# Unit tests
-npm test
+### Frontend
 
-# E2E tests
-npm run test:e2e
+```bash
+npm test
 ```
 
-### Test Scenarios
-- Stake tokens successfully
-- Unstake partial/full amounts
-- Claim rewards correctly
-- Handle edge cases (zero amounts, insufficient balance)
-- Emergency functions work
+> Includes edge cases like staking zero, insufficient balance, reward claiming, and unstaking.
 
-## 🚀 Deployment
+---
 
-### Smart Contracts
-1. Deploy to Base Sepolia testnet
-2. Verify contracts on BaseScan
-3. Update frontend with contract addresses
+## 🌐 Deployment
 
 ### Frontend
+
 ```bash
-# Build production bundle
 npm run build
-
-# Deploy to Vercel
-vercel --prod
-
-# Or deploy to Netlify
-netlify deploy --prod --dir=build
+vercel --prod  # or netlify deploy
 ```
 
-## 🔧 Configuration
+### Smart Contracts
 
-### Network Configuration
-```javascript
-// hardhat.config.js
-networks: {
-  "base-sepolia": {
-    url: "https://sepolia.base.org",
-    accounts: [process.env.PRIVATE_KEY],
-    chainId: 84532,
-  }
-}
-```
+1. Deploy to Base Sepolia
+2. Verify via [BaseScan](https://sepolia.basescan.org/)
+3. Update frontend `.env` with deployed addresses
 
-### Contract Parameters
-- **APY**: Configurable annual percentage yield
-- **Min Stake**: Minimum staking amount
-- **Reward Token**: Token used for rewards
-- **Admin Controls**: Pause, parameter updates
+---
 
-## 📊 Analytics & Monitoring
+## 🔍 Analytics & Monitoring
 
-### Key Metrics
-- Total Value Locked (TVL)
-- Number of stakers
-- Average stake amount
-- Reward distribution rate
-- APY effectiveness
+### Suggested Metrics
 
-### Events to Monitor
+* Total Value Locked (TVL)
+* # of Active Stakers
+* Rewards Claimed
+* Average Stake Size
+
+### Emit Events
+
 ```solidity
 event Staked(address indexed user, uint256 amount);
 event Unstaked(address indexed user, uint256 amount);
@@ -293,11 +276,27 @@ event RewardsClaimed(address indexed user, uint256 amount);
 event APYUpdated(uint256 newAPY);
 ```
 
-## 🚨 Security Considerations
+---
 
-### Smart Contract Security
-- Use OpenZeppelin's battle-tested contracts
-- Implement comprehensive access controls
-- Add emergency pause functionality
-- Regular security audits
+## 🔐 Security Practices
+
+* ✅ Reentrancy guard (via `nonReentrant`)
+* ✅ Role-based access control
+* ✅ Safe math via Solidity ≥0.8
+* ✅ Emergency pause switch
+* ✅ OpenZeppelin best practices
+
+---
+
+## 📬 Feedback & Contributions
+
+Feel free to open issues, PRs, or feature requests!
+
+---
+
+## 🏁 License
+```
+MIT License © 2025 Qasim Rokeeb
+
+```
 
